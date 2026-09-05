@@ -1,169 +1,59 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
-  <!-- Google tag (gtag.js) -->
+
+  <!-- Google Analytics -->
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-M9MEEYZP72"></script>
+
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
     gtag('js', new Date());
     gtag('config', 'G-M9MEEYZP72');
   </script>
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
 
-  <!-- iOS meta tags & icons -->
+  <meta name="description" content="STELA Learning Management System">
+
+  <!-- Mobile Web App -->
+
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- iOS meta tags -->
+
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="stela_app">
+  <meta name="apple-mobile-web-app-title" content="STELA">
+
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png" />
 
-  <title>stela_app</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <title>STELA LMS</title>
+
+  <!-- PWA Manifest -->
+
   <link rel="manifest" href="manifest.json">
-
-  <script src="flutter_bootstrap.js" async></script>
 </head>
 
 <body>
-  <!-- Vercel Web Analytics (minimal integration for non-Next.js / SPA sites) -->
-  <!--
-    This snippet sends a page-view to Vercel's built-in analytics endpoint
-    (`/_vercel/insights/view`) on initial load and on client-side navigation
-    (history.pushState / popstate). It uses navigator.sendBeacon when available
-    and falls back to fetch with keepalive. Events are skipped on localhost.
 
-    Notes:
-    - Enable Web Analytics for your project in the Vercel dashboard first.
-    - This will only report after you deploy to Vercel (analytics are disabled
-      in development mode/localhost).
-  -->
-  <script>
-    (function () {
-      // Don't track in local development
-      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') return;
+  <!-- Flutter Application -->
 
-      function sendView(url) {
-        try {
-          var endpoint = '/_vercel/insights/view';
-          // Build a full absolute URL (server expects o to be a string starting with http:// or https://)
-          var fullUrl = url ? (new URL(url, location.origin)).href : location.href;
-          // Use the minimal shape server expects: o = full url string, ts = timestamp
-          var payloadObj = { o: fullUrl, ts: Date.now() };
-          var payload = JSON.stringify(payloadObj);
-          console.debug('[Vercel Analytics] sendView ->', payload);
-          if (navigator.sendBeacon) {
-            try {
-              // Use a Blob to ensure content-type is application/json where supported
-              var b = new Blob([payload], { type: 'application/json' });
-              var ok = navigator.sendBeacon(endpoint, b);
-              console.debug('[Vercel Analytics] sendBeacon result:', ok);
-              if (ok) return;
-            } catch (e) {
-              console.debug('[Vercel Analytics] sendBeacon error', e);
-            }
-          }
+  <script src="flutter_bootstrap.js" async></script>
 
-          // Fallback: use keepalive fetch so it can be sent when navigating away
-          try {
-            fetch(endpoint, {
-              method: 'POST',
-              keepalive: true,
-              headers: { 'Content-Type': 'application/json' },
-              body: payload,
-              mode: 'cors'
-            }).then(function (res) {
-              console.debug('[Vercel Analytics] fetch result', res && res.status);
-            }).catch(function (err) {
-              console.debug('[Vercel Analytics] fetch error', err);
-            });
-          } catch (e) {
-            console.debug('[Vercel Analytics] fetch exception', e);
-          }
-
-          // Additional fallback: fire an image GET request so servers that expect
-          // a simple GET are still hit. This helps when POSTs are blocked or
-          // when a different payload format is expected by the platform.
-          try {
-            var img = new Image(1, 1);
-            img.onload = function () { console.debug('[Vercel Analytics] image GET succeeded'); };
-            img.onerror = function () { console.debug('[Vercel Analytics] image GET failed'); };
-            img.src = endpoint + '?url=' + encodeURIComponent(fullUrl);
-          } catch (e) { console.debug('[Vercel Analytics] image fallback error', e); }
-        } catch (e) {
-          // silent
-        }
-      }
-
-      // Initial page view
-      sendView();
-
-      // Hook history.pushState to track SPA navigations
-      var _pushState = history.pushState;
-      history.pushState = function () {
-        var ret = _pushState.apply(this, arguments);
-        // arguments[2] is the URL passed to pushState
-        try {
-          var newUrl = arguments[2] || (location.pathname + location.search);
-          console.debug('[Vercel Analytics] pushState ->', newUrl);
-          // sendView will resolve relative URLs to absolute
-          sendView(newUrl);
-        } catch (e) { console.debug('[Vercel Analytics] pushState error', e); }
-        return ret;
-      };
-
-      // Also listen for back/forward navigation
-      window.addEventListener('popstate', function () {
-        sendView(location.pathname + location.search);
-      });
-    })();
-  </script>
-
-  <!-- Vercel Speed Insights (minimal integration for static / non-Next apps) -->
-  <!--
-    This will load the Speed Insights script that Vercel exposes at
-    /_vercel/speed-insights/script.js after you enable Speed Insights in the
-    Vercel dashboard and deploy. The script collects web vitals and other
-    performance metrics and sends them to Vercel.
-
-    Notes:
-    - Enable Speed Insights for the project in the Vercel dashboard first.
-    - The script is served from Vercel after enabling and deployment; locally
-      it may 404 which is harmless. We skip loading on localhost to avoid
-      development noise.
-  -->
-  <script>
-    (function () {
-      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') return;
-      try {
-        var s = document.createElement('script');
-        s.defer = true;
-        s.src = '/_vercel/speed-insights/script.js';
-        document.body.appendChild(s);
-      } catch (e) {
-        // silent
-      }
-    })();
-  </script>
 </body>
 
 </html>
