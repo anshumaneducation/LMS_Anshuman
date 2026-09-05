@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "629178175007",
+    "firebase_url": "https://lms-anshuman-default-rtdb.firebaseio.com",
+    "project_id": "lms-anshuman",
+    "storage_bucket": "lms-anshuman.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629178175007:android:d1abc777c74419ffea0f2a",
+        "android_client_info": {
+          "package_name": "com.example.stela_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ-AGLIkwR8iVeKmPf1Qw--qTwTot4lwY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
